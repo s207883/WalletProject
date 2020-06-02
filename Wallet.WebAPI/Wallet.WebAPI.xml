@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wallet.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:Wallet.WebAPI.Controllers.CurrencyController.TestMethod">
+            <summary>
+            Test
+            </summary>
+            <returns>return</returns>
+        </member>
+    </members>
+</doc>

@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.WebAPI", "Wallet.WebAPI\Wallet.WebAPI.csproj", "{DCF06897-9D62-4BAE-86E6-E5C648749567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.DAL", "Wallet.DAL\Wallet.DAL.csproj", "{D18E8FC5-DB75-44BA-8670-1FE86C118252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.BLL", "Wallet.BLL\Wallet.BLL.csproj", "{BDA5F544-2D7D-40F7-9E3F-D6DB18DEC012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Services", "Wallet.Services\Wallet.Services.csproj", "{BADDC147-CA57-4DC7-AF3F-147D31E115F1}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCF06897-9D62-4BAE-86E6-E5C648749567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF06897-9D62-4BAE-86E6-E5C648749567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF06897-9D62-4BAE-86E6-E5C648749567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF06897-9D62-4BAE-86E6-E5C648749567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D18E8FC5-DB75-44BA-8670-1FE86C118252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18E8FC5-DB75-44BA-8670-1FE86C118252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18E8FC5-DB75-44BA-8670-1FE86C118252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18E8FC5-DB75-44BA-8670-1FE86C118252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA5F544-2D7D-40F7-9E3F-D6DB18DEC012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA5F544-2D7D-40F7-9E3F-D6DB18DEC012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA5F544-2D7D-40F7-9E3F-D6DB18DEC012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA5F544-2D7D-40F7-9E3F-D6DB18DEC012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BADDC147-CA57-4DC7-AF3F-147D31E115F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BADDC147-CA57-4DC7-AF3F-147D31E115F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BADDC147-CA57-4DC7-AF3F-147D31E115F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BADDC147-CA57-4DC7-AF3F-147D31E115F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
