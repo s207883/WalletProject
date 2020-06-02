@@ -28,12 +28,12 @@ namespace Wallet.Services.CurrencyService
 		}
 
 		/// <summary>
-		/// Получить множитель
+		/// Перевести валюту.
 		/// </summary>
 		/// <param name="from">Из какой валюты.</param>
 		/// <param name="to">В какую валюту.</param>
-		/// <returns>Множитель.</returns>
-		public async Task<float> GetCurrencyRateAsync(string from, string to, float amount)
+		/// <returns>Результат перевода или null.</returns>
+		public async Task<long?> GetCurrencyRateAsync(string from, string to, float amount)
 		{
 			if (string.IsNullOrWhiteSpace(from))
 			{
@@ -66,7 +66,7 @@ namespace Wallet.Services.CurrencyService
 			catch (Exception)
 			{
 				//TODO: Log this
-				return 0;
+				return null;
 			}
 		}
 	}
@@ -111,7 +111,7 @@ namespace Wallet.Services.CurrencyService
 		public string date { get; set; }
 
 		[SuppressMessage("Style", "IDE1006:Стили именования", Justification = "<Ожидание>")]
-		public float result { get; set; }
+		public long result { get; set; }
 	}
 	#endregion
 

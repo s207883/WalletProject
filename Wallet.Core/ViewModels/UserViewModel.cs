@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Wallet.Core.ViewModels
 {
@@ -9,6 +7,11 @@ namespace Wallet.Core.ViewModels
 	/// </summary>
 	public class UserViewModel
 	{
+		/// <summary>
+		/// Идентификатор пользователя.
+		/// </summary>
+		public int UserId { get; set; }
+
 		/// <summary>
 		/// Имя пользователя.
 		/// </summary>

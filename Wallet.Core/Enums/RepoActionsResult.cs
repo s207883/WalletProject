@@ -13,6 +13,11 @@
 		/// <summary>
 		/// Успех.
 		/// </summary>
-		Success
+		Success,
+
+		/// <summary>
+		/// Не обнаружена запись в бд.
+		/// </summary>
+		IdentityNotFound,
 	}
 }

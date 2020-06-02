@@ -27,6 +27,11 @@ namespace Wallet.DAL
 		public DbSet<Currency> Currencies { get; set; }
 
 		/// <summary>
+		/// Счета.
+		/// </summary>
+		public DbSet<BankAccount> BankAccounts { get; set; }
+
+		/// <summary>
 		/// Основной контекст приложения.
 		/// </summary>
 		/// <param name="options">Параметры.</param>

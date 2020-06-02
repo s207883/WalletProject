@@ -10,6 +10,11 @@ namespace Wallet.Core.ViewModels
 	public class BankAccountViewModel
 	{
 		/// <summary>
+		/// Идентификатор счета.
+		/// </summary>
+		public int BankAccountId { get; set; }
+
+		/// <summary>
 		/// Название валюты.
 		/// </summary>
 		public string CurrencyName { get; set; }
