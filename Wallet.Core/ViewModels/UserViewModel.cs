@@ -15,7 +15,7 @@ namespace Wallet.Core.ViewModels
 		public string UserName { get; set; }
 
 		/// <summary>
-		/// Аккаунты пользователя.
+		/// Счета пользователя.
 		/// </summary>
 		public IEnumerable<BankAccountViewModel> BankAccounts { get; set; }
 	}
