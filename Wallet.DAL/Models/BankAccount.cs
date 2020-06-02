@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Text;
 
 namespace Wallet.DAL.Models
@@ -27,7 +28,7 @@ namespace Wallet.DAL.Models
 		/// <summary>
 		/// Сумма на счету.
 		/// </summary>
-		public float Amount { get; set; }
+		public long Amount { get; set; }
 
 		#region Навигационные свойства
 		public UserWallet UserWallet { get; set; }

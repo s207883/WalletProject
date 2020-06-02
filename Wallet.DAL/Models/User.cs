@@ -17,7 +17,7 @@ namespace Wallet.DAL.Models
 		/// <summary>
 		/// Имя пользователя.
 		/// </summary>
-		public int UserName { get; set; }
+		public string UserName { get; set; }
 
 		#region Навигационные свойства
 		public UserWallet UserWallet { get; set; }

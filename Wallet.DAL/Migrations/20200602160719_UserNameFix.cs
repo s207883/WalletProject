@@ -2,7 +2,7 @@
 
 namespace Wallet.DAL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class UserNameFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,7 @@ namespace Wallet.DAL.Migrations
                 {
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<int>(nullable: false)
+                    UserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,7 +59,7 @@ namespace Wallet.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserWalletId = table.Column<int>(nullable: false),
                     CurrencyId = table.Column<int>(nullable: false),
-                    Amount = table.Column<float>(nullable: false)
+                    Amount = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,6 +76,54 @@ namespace Wallet.DAL.Migrations
                         principalTable: "UserWallets",
                         principalColumn: "UserWalletId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Currencies",
+                columns: new[] { "CurrencyId", "CurrencyName" },
+                values: new object[,]
+                {
+                    { 1, "RUB" },
+                    { 2, "EUR" },
+                    { 3, "USD" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "Ivanov" },
+                    { 2, "Petrov" },
+                    { 3, "Eelon Musk" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserWallets",
+                columns: new[] { "UserWalletId", "UserId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "UserWallets",
+                columns: new[] { "UserWalletId", "UserId" },
+                values: new object[] { 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "UserWallets",
+                columns: new[] { "UserWalletId", "UserId" },
+                values: new object[] { 3, 3 });
+
+            migrationBuilder.InsertData(
+                table: "BankAccount",
+                columns: new[] { "BankAccountId", "Amount", "CurrencyId", "UserWalletId" },
+                values: new object[,]
+                {
+                    { 1, 1000L, 1, 1 },
+                    { 2, 2000L, 2, 1 },
+                    { 3, 3000L, 3, 1 },
+                    { 4, 5000L, 1, 2 },
+                    { 5, 8000L, 3, 2 },
+                    { 6, 30000000L, 3, 3 }
                 });
 
             migrationBuilder.CreateIndex(

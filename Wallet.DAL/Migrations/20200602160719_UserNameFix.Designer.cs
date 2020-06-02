@@ -9,8 +9,8 @@ using Wallet.DAL;
 namespace Wallet.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200602154904_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200602160719_UserNameFix")]
+    partial class UserNameFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,8 +27,8 @@ namespace Wallet.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
@@ -43,6 +43,50 @@ namespace Wallet.DAL.Migrations
                     b.HasIndex("UserWalletId");
 
                     b.ToTable("BankAccount");
+
+                    b.HasData(
+                        new
+                        {
+                            BankAccountId = 1,
+                            Amount = 1000L,
+                            CurrencyId = 1,
+                            UserWalletId = 1
+                        },
+                        new
+                        {
+                            BankAccountId = 2,
+                            Amount = 2000L,
+                            CurrencyId = 2,
+                            UserWalletId = 1
+                        },
+                        new
+                        {
+                            BankAccountId = 3,
+                            Amount = 3000L,
+                            CurrencyId = 3,
+                            UserWalletId = 1
+                        },
+                        new
+                        {
+                            BankAccountId = 4,
+                            Amount = 5000L,
+                            CurrencyId = 1,
+                            UserWalletId = 2
+                        },
+                        new
+                        {
+                            BankAccountId = 5,
+                            Amount = 8000L,
+                            CurrencyId = 3,
+                            UserWalletId = 2
+                        },
+                        new
+                        {
+                            BankAccountId = 6,
+                            Amount = 30000000L,
+                            CurrencyId = 3,
+                            UserWalletId = 3
+                        });
                 });
 
             modelBuilder.Entity("Wallet.DAL.Models.Currency", b =>
@@ -58,6 +102,23 @@ namespace Wallet.DAL.Migrations
                     b.HasKey("CurrencyId");
 
                     b.ToTable("Currencies");
+
+                    b.HasData(
+                        new
+                        {
+                            CurrencyId = 1,
+                            CurrencyName = "RUB"
+                        },
+                        new
+                        {
+                            CurrencyId = 2,
+                            CurrencyName = "EUR"
+                        },
+                        new
+                        {
+                            CurrencyId = 3,
+                            CurrencyName = "USD"
+                        });
                 });
 
             modelBuilder.Entity("Wallet.DAL.Models.User", b =>
@@ -67,12 +128,29 @@ namespace Wallet.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("UserName")
-                        .HasColumnType("int");
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            UserName = "Ivanov"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            UserName = "Petrov"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            UserName = "Eelon Musk"
+                        });
                 });
 
             modelBuilder.Entity("Wallet.DAL.Models.UserWallet", b =>
@@ -91,6 +169,23 @@ namespace Wallet.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("UserWallets");
+
+                    b.HasData(
+                        new
+                        {
+                            UserWalletId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            UserWalletId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            UserWalletId = 3,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("Wallet.DAL.Models.BankAccount", b =>
