@@ -9,8 +9,8 @@ using Wallet.DAL;
 namespace Wallet.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200602160719_UserNameFix")]
-    partial class UserNameFix
+    [Migration("20200603083030_user_wallet_fix")]
+    partial class user_wallet_fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace Wallet.DAL.Migrations
 
                     b.HasIndex("UserWalletId");
 
-                    b.ToTable("BankAccount");
+                    b.ToTable("BankAccounts");
 
                     b.HasData(
                         new
@@ -165,8 +165,7 @@ namespace Wallet.DAL.Migrations
 
                     b.HasKey("UserWalletId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserWallets");
 
@@ -206,8 +205,8 @@ namespace Wallet.DAL.Migrations
             modelBuilder.Entity("Wallet.DAL.Models.UserWallet", b =>
                 {
                     b.HasOne("Wallet.DAL.Models.User", "User")
-                        .WithOne("UserWallet")
-                        .HasForeignKey("Wallet.DAL.Models.UserWallet", "UserId")
+                        .WithMany("UserWallets")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
