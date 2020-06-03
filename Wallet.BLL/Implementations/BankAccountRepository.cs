@@ -116,6 +116,10 @@ namespace Wallet.BLL.Implementations
 				.Include(w => w.BankAccounts)
 				.ThenInclude(ba => ba.Currency)
 				.FirstOrDefaultAsync(wallet => wallet.UserWalletId == walletId);
+			if (userWallet == default)
+			{
+				return (BankRepoActionResults.WalletNotFound, null);
+			}
 
 			var originAccount = userWallet.BankAccounts
 				.FirstOrDefault(acc => acc.CurrencyId == originCurrencyId);
@@ -140,16 +144,31 @@ namespace Wallet.BLL.Implementations
 
 			var destinationAccount = userWallet.BankAccounts
 				.FirstOrDefault(acc => acc.CurrencyId == destinationCurrencyId);
-			if (destinationAccount == default)
-			{
-				destinationAccount = new BankAccount { UserWalletId = walletId, CurrencyId = destinationCurrencyId, Amount = 0 };
-			}
 
 			var serivceResult = await _currencyService.GetCurrencyRateAsync(originAccount.Currency.CurrencyName, destinationCurrency.CurrencyName, amountToExhange);
 			if (serivceResult.HasValue && serivceResult.Value > 0)
 			{
 				originAccount.Amount -= amountToExhange;
-				destinationAccount.Amount += serivceResult.Value;
+
+				if (destinationAccount == default)
+				{
+					var newAccount = new BankAccount
+					{
+						CurrencyId = destinationCurrencyId,
+						UserWalletId = userWallet.UserWalletId,
+						Amount = serivceResult.Value,
+					};
+					await _applicationContext.BankAccounts.AddAsync(newAccount);
+
+					newAccount.UserWallet = userWallet;
+					newAccount.Currency = destinationCurrency;
+
+					destinationAccount = newAccount;
+				}
+				else
+				{
+					destinationAccount.Amount += serivceResult.Value;
+				}
 
 				await _applicationContext.SaveChangesAsync();
 

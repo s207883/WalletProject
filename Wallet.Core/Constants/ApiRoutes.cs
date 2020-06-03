@@ -29,6 +29,11 @@
 			/// Decrease amount endpoint.
 			/// </summary>
 			public const string DecreaseAccountAcount = Root + "/" + Path + "/" + "decreaseAccountAcount";
+
+			/// <summary>
+			/// Currency exchanging endpoint.
+			/// </summary>
+			public const string ExchangeCurrency = Root + "/" + Path + "/" + "exchangeCurrency";
 		}
 
 		public static class CurrencyRoutes

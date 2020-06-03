@@ -18,7 +18,14 @@
             <param name="amountEditModel">Модель изменения счета .</param>
             <returns>Новое состояние счета .</returns>
         </member>
-        <member name="M:Wallet.WebAPI.Controllers.BankAccountController.MakeRequestByRepoResult(Wallet.Core.Enums.BankRepoActionResults,Wallet.Core.ViewModels.BankAccountViewModel)">
+        <member name="M:Wallet.WebAPI.Controllers.BankAccountController.ExchaneCurrency(Wallet.Core.EditModels.CurrencyExchangeEditModel)">
+            <summary>
+            Перевести деньги из одной валюты в другую.
+            </summary>
+            <param name="model">Модель.</param>
+            <returns>Результат перевода.</returns>
+        </member>
+        <member name="M:Wallet.WebAPI.Controllers.BankAccountController.GetRepoAmountRequestResult(Wallet.Core.Enums.BankRepoActionResults,Wallet.Core.ViewModels.BankAccountViewModel)">
             <summary>
             Сгенерировать ответ по полученным данным из непозитория.
             </summary>
