@@ -14,7 +14,7 @@ namespace Wallet.BLL.Interfaces
 		/// </summary>
 		/// <param name="userId">Идентификатор пользователя.</param>
 		/// <returns>Результат запроса и модель.</returns>
-		Task<(RepoActionsResult Result, UserViewModel UserViewModel)> GetUserByIdAsync(int userId);
+		Task<(UserRepoActionsResult Result, UserViewModel UserViewModel)> GetUserByIdAsync(int userId);
 
 	}
 }
