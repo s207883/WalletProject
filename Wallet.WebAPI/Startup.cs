@@ -8,8 +8,12 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Reflection;
+using Wallet.BLL;
+using Wallet.BLL.Implementations;
+using Wallet.BLL.Interfaces;
 using Wallet.Core.AutomapperConfig;
 using Wallet.DAL;
+using Wallet.Services.CurrencyService;
 
 namespace Wallet.WebAPI
 {
@@ -31,9 +35,17 @@ namespace Wallet.WebAPI
 				options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=WebAPI_DB;Integrated Security=true;"
 			));
 
+			services.AddSingleton<ICurrencyService, CurrencyService>();
+			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IBankAccountRepository, BankAccountRepository>();
+			services.AddScoped<IWalletRepository, WalletRepository>();
+
+			services.AddScoped<RepoManager>();
+
 			var mappingConfig = new MapperConfiguration(mc =>
 			{
 				mc.AddProfile(new BankAccountProfile());
+				mc.AddProfile(new UserProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();

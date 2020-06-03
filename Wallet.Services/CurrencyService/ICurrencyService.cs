@@ -14,6 +14,6 @@ namespace Wallet.Services.CurrencyService
 		/// <param name="from">Из какой валюты.</param>
 		/// <param name="to">В какую валюту.</param>
 		/// <returns>Результат перевода или null.</returns>
-		Task<long?> GetCurrencyRateAsync(string from, string to, float amount);
+		Task<float?> GetCurrencyRateAsync(string from, string to, float amount);
 	}
 }

@@ -13,7 +13,7 @@ namespace Wallet.BLL.Implementations
 	/// <summary>
 	/// Репозиторий пользователя.
 	/// </summary>
-	class WalletRepository : IWalletRepository
+	public class WalletRepository : IWalletRepository
 	{
 		private readonly ApplicationContext _applicationContext;
 		private readonly IMapper _mapper;

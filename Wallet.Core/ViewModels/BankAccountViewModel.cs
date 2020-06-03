@@ -18,6 +18,6 @@
 		/// <summary>
 		/// Количество.
 		/// </summary>
-		public long Amount { get; set; }
+		public float Amount { get; set; }
 	}
 }

@@ -25,8 +25,8 @@ namespace Wallet.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
 
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
@@ -46,42 +46,42 @@ namespace Wallet.DAL.Migrations
                         new
                         {
                             BankAccountId = 1,
-                            Amount = 1000L,
+                            Amount = 1000m,
                             CurrencyId = 1,
                             UserWalletId = 1
                         },
                         new
                         {
                             BankAccountId = 2,
-                            Amount = 2000L,
+                            Amount = 2000m,
                             CurrencyId = 2,
                             UserWalletId = 1
                         },
                         new
                         {
                             BankAccountId = 3,
-                            Amount = 3000L,
+                            Amount = 3000m,
                             CurrencyId = 3,
                             UserWalletId = 1
                         },
                         new
                         {
                             BankAccountId = 4,
-                            Amount = 5000L,
+                            Amount = 5000m,
                             CurrencyId = 1,
                             UserWalletId = 2
                         },
                         new
                         {
                             BankAccountId = 5,
-                            Amount = 8000L,
+                            Amount = 8000m,
                             CurrencyId = 3,
                             UserWalletId = 2
                         },
                         new
                         {
                             BankAccountId = 6,
-                            Amount = 30000000L,
+                            Amount = 30000000m,
                             CurrencyId = 3,
                             UserWalletId = 3
                         });

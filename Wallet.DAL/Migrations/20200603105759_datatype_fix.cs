@@ -2,7 +2,7 @@
 
 namespace Wallet.DAL.Migrations
 {
-    public partial class user_wallet_fix : Migration
+    public partial class datatype_fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,7 @@ namespace Wallet.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserWalletId = table.Column<int>(nullable: false),
                     CurrencyId = table.Column<int>(nullable: false),
-                    Amount = table.Column<long>(nullable: false)
+                    Amount = table.Column<decimal>(type: "money", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,12 +118,12 @@ namespace Wallet.DAL.Migrations
                 columns: new[] { "BankAccountId", "Amount", "CurrencyId", "UserWalletId" },
                 values: new object[,]
                 {
-                    { 1, 1000L, 1, 1 },
-                    { 2, 2000L, 2, 1 },
-                    { 3, 3000L, 3, 1 },
-                    { 4, 5000L, 1, 2 },
-                    { 5, 8000L, 3, 2 },
-                    { 6, 30000000L, 3, 3 }
+                    { 1, 1000m, 1, 1 },
+                    { 2, 2000m, 2, 1 },
+                    { 3, 3000m, 3, 1 },
+                    { 4, 5000m, 1, 2 },
+                    { 5, 8000m, 3, 2 },
+                    { 6, 30000000m, 3, 3 }
                 });
 
             migrationBuilder.CreateIndex(

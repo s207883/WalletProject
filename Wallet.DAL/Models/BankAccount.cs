@@ -23,7 +23,7 @@
 		/// <summary>
 		/// Сумма на счету.
 		/// </summary>
-		public long Amount { get; set; }
+		public float Amount { get; set; }
 
 		#region Навигационные свойства
 		public UserWallet UserWallet { get; set; }

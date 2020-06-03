@@ -4,11 +4,12 @@
         <name>Wallet.WebAPI</name>
     </assembly>
     <members>
-        <member name="M:Wallet.WebAPI.Controllers.CurrencyController.TestMethod">
+        <member name="M:Wallet.WebAPI.Controllers.CurrencyController.ConvertCurrency(Wallet.Core.EditModels.CurrencyConvertEditModel)">
             <summary>
-            Test
+            Конвертировать валюту.
             </summary>
-            <returns>return</returns>
+            <param name="currencyModel">Модель.</param>
+            <returns>Результат конвертации.</returns>
         </member>
     </members>
 </doc>

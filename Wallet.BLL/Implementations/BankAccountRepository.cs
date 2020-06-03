@@ -17,9 +17,9 @@ namespace Wallet.BLL.Implementations
 	{
 		private readonly ApplicationContext _applicationContext;
 		private readonly IMapper _mapper;
-		private readonly CurrencyService _currencyService;
+		private readonly ICurrencyService _currencyService;
 
-		public BankAccountRepository(ApplicationContext applicationContext, IMapper mapper, CurrencyService currencyService)
+		public BankAccountRepository(ApplicationContext applicationContext, IMapper mapper, ICurrencyService currencyService)
 		{
 			_applicationContext = applicationContext ?? throw new ArgumentNullException(nameof(applicationContext));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -28,7 +28,7 @@ namespace Wallet.BLL.Implementations
 
 
 		/// <inheritdoc/>
-		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, long amount)
+		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, float amount)
 		{
 			#region Param check
 			if (accountId <= 0)
@@ -65,7 +65,7 @@ namespace Wallet.BLL.Implementations
 		}
 
 		/// <inheritdoc/>
-		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, long amount)
+		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, float amount)
 		{
 			#region Param check
 			if (accountId <= 0)
@@ -95,7 +95,7 @@ namespace Wallet.BLL.Implementations
 		}
 
 		/// <inheritdoc/>
-		public async Task<(BankRepoActionResults Result, IEnumerable<BankAccountViewModel> bankAccounts)> ExchangeCurrencyAsync(int walletId, int originCurrencyId, int destinationCurrencyId, long amountToExhange)
+		public async Task<(BankRepoActionResults Result, IEnumerable<BankAccountViewModel> bankAccounts)> ExchangeCurrencyAsync(int walletId, int originCurrencyId, int destinationCurrencyId, float amountToExhange)
 		{
 			#region Param check
 			if (walletId <= 0)

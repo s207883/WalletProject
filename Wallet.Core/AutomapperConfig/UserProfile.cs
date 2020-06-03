@@ -7,7 +7,7 @@ namespace Wallet.Core.AutomapperConfig
 	/// <summary>
 	/// Профиль автомаппера для пользователя.
 	/// </summary>
-	class UserProfile : Profile
+	public class UserProfile : Profile
 	{
 		public UserProfile()
 		{

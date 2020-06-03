@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data.SqlTypes;
 using Wallet.DAL.Models;
 
 namespace Wallet.DAL
@@ -63,8 +64,10 @@ namespace Wallet.DAL
 
 			#endregion
 
-			#region Currency table
-
+			#region Bank account table
+			modelBuilder.Entity<BankAccount>()
+				.Property(p => p.Amount)
+				.HasColumnType("money");
 			modelBuilder.Entity<BankAccount>()
 				.HasOne(ba => ba.UserWallet)
 				.WithMany(wlt => wlt.BankAccounts);

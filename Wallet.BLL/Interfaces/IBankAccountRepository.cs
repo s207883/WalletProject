@@ -16,7 +16,7 @@ namespace Wallet.BLL.Interfaces
 		/// <param name="accountId">Идентификатор счета.</param>
 		/// <param name="amount">Количество.</param>
 		/// <returns>Результат работы и новое состояние счета.</returns>
-		Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, long amount);
+		Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, float amount);
 
 		/// <summary>
 		/// Уменьшить количество денег на счете.
@@ -24,7 +24,7 @@ namespace Wallet.BLL.Interfaces
 		/// <param name="accountId">Идентификатор счета.</param>
 		/// <param name="amount">Количество.</param>
 		/// <returns>Результат работы и новое состояние счета.</returns>
-		Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, long amount);
+		Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, float amount);
 
 
 		/// <summary>
@@ -36,6 +36,6 @@ namespace Wallet.BLL.Interfaces
 		/// <param name="destinationCurrencyId">Идентификатор валюты, на которую нужно поменять.</param>
 		/// <param name="amountToExhange">Количество валюты для обмена.</param>
 		/// <returns>Результат работы и новое состояние счетов.</returns>
-		Task<(BankRepoActionResults Result, IEnumerable<BankAccountViewModel> bankAccounts)> ExchangeCurrencyAsync(int walletId, int originCurrencyId, int destinationCurrencyId, long amountToExhange);
+		Task<(BankRepoActionResults Result, IEnumerable<BankAccountViewModel> bankAccounts)> ExchangeCurrencyAsync(int walletId, int originCurrencyId, int destinationCurrencyId, float amountToExhange);
 	}
 }
