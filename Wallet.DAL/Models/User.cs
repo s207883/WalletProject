@@ -1,4 +1,6 @@
-﻿namespace Wallet.DAL.Models
+﻿using System.Collections.Generic;
+
+namespace Wallet.DAL.Models
 {
 	/// <summary>
 	/// Модель пользователя.
@@ -16,7 +18,7 @@
 		public string UserName { get; set; }
 
 		#region Навигационные свойства
-		public UserWallet UserWallet { get; set; }
+		public IEnumerable<UserWallet> UserWallets { get; set; }
 		#endregion
 	}
 }

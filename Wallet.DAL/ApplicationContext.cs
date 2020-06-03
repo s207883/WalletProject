@@ -34,17 +34,17 @@ namespace Wallet.DAL
 		/// <param name="options">Параметры.</param>
 		public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
 		{
-			Database.EnsureCreated();
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			//TODO: Move to modelConfig class.
 			#region User table
 
 			modelBuilder.Entity<User>()
-				.HasOne(user => user.UserWallet)
-				.WithOne(wallet => wallet.User);
-
+				.HasMany(wallet => wallet.UserWallets)
+				.WithOne(user => user.User);
+				
 			#endregion
 
 			#region User wallet table
@@ -52,6 +52,22 @@ namespace Wallet.DAL
 			modelBuilder.Entity<UserWallet>()
 				.HasMany(uw => uw.BankAccounts)
 				.WithOne(ba => ba.UserWallet);
+
+			#endregion
+
+			#region Currency table
+
+			modelBuilder.Entity<Currency>()
+				.HasMany(ba => ba.BankAccounts)
+				.WithOne(cur => cur.Currency);
+
+			#endregion
+
+			#region Currency table
+
+			modelBuilder.Entity<BankAccount>()
+				.HasOne(ba => ba.UserWallet)
+				.WithMany(wlt => wlt.BankAccounts);
 
 			#endregion
 

@@ -2,7 +2,7 @@
 
 namespace Wallet.DAL.Migrations
 {
-    public partial class UserNameFix : Migration
+    public partial class user_wallet_fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace Wallet.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BankAccount",
+                name: "BankAccounts",
                 columns: table => new
                 {
                     BankAccountId = table.Column<int>(nullable: false)
@@ -63,15 +63,15 @@ namespace Wallet.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BankAccount", x => x.BankAccountId);
+                    table.PrimaryKey("PK_BankAccounts", x => x.BankAccountId);
                     table.ForeignKey(
-                        name: "FK_BankAccount_Currencies_CurrencyId",
+                        name: "FK_BankAccounts_Currencies_CurrencyId",
                         column: x => x.CurrencyId,
                         principalTable: "Currencies",
                         principalColumn: "CurrencyId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BankAccount_UserWallets_UserWalletId",
+                        name: "FK_BankAccounts_UserWallets_UserWalletId",
                         column: x => x.UserWalletId,
                         principalTable: "UserWallets",
                         principalColumn: "UserWalletId",
@@ -114,7 +114,7 @@ namespace Wallet.DAL.Migrations
                 values: new object[] { 3, 3 });
 
             migrationBuilder.InsertData(
-                table: "BankAccount",
+                table: "BankAccounts",
                 columns: new[] { "BankAccountId", "Amount", "CurrencyId", "UserWalletId" },
                 values: new object[,]
                 {
@@ -127,26 +127,25 @@ namespace Wallet.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BankAccount_CurrencyId",
-                table: "BankAccount",
+                name: "IX_BankAccounts_CurrencyId",
+                table: "BankAccounts",
                 column: "CurrencyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BankAccount_UserWalletId",
-                table: "BankAccount",
+                name: "IX_BankAccounts_UserWalletId",
+                table: "BankAccounts",
                 column: "UserWalletId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserWallets_UserId",
                 table: "UserWallets",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BankAccount");
+                name: "BankAccounts");
 
             migrationBuilder.DropTable(
                 name: "Currencies");
