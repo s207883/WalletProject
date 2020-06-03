@@ -21,11 +21,13 @@ namespace Wallet.BLL.Implementations
 		{
 			if (applicationContext is null)
 			{
+				//TODO: Log this
 				throw new ArgumentNullException(nameof(applicationContext));
 			}
 
 			if (mapper is null)
 			{
+				//TODO: Log this
 				throw new ArgumentNullException(nameof(mapper));
 			}
 
@@ -47,7 +49,7 @@ namespace Wallet.BLL.Implementations
 
 			var user = await _applicationContext.Users
 				.AsNoTracking()
-				.Include(usr => usr.UserWallet)
+				.Include(usr => usr.UserWallets)
 				.ThenInclude(wlt => wlt.BankAccounts)
 				.FirstOrDefaultAsync(usr => usr.UserId == userId);
 
