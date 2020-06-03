@@ -45,6 +45,8 @@ namespace Wallet.WebAPI
 			var mappingConfig = new MapperConfiguration(mc =>
 			{
 				mc.AddProfile(new BankAccountProfile());
+				mc.AddProfile(new UserWalletProfile());
+				mc.AddProfile(new CurrencyProfile());
 				mc.AddProfile(new UserProfile());
 			});
 

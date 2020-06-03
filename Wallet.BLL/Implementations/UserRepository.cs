@@ -39,6 +39,7 @@ namespace Wallet.BLL.Implementations
 				.AsNoTracking()
 				.Include(usr => usr.UserWallets)
 				.ThenInclude(wlt => wlt.BankAccounts)
+				.ThenInclude(cur => cur.Currency)
 				.FirstOrDefaultAsync(usr => usr.UserId == userId);
 
 			if (user == default)

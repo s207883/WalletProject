@@ -11,5 +11,12 @@
             <param name="currencyModel">Модель.</param>
             <returns>Результат конвертации.</returns>
         </member>
+        <member name="M:Wallet.WebAPI.Controllers.UserController.GetUserById(System.Int32)">
+            <summary>
+            Получить пользователя по идентификатору.
+            </summary>
+            <param name="userId">Идентификатор.</param>
+            <returns>Модель пользователя.</returns>
+        </member>
     </members>
 </doc>

@@ -13,7 +13,7 @@
 		/// <summary>
 		/// Название валюты.
 		/// </summary>
-		public string CurrencyName { get; set; }
+		public CurrencyViewModel Currency { get; set; }
 
 		/// <summary>
 		/// Количество.
