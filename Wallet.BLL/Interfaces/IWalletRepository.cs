@@ -8,7 +8,7 @@ using Wallet.Core.ViewModels;
 namespace Wallet.BLL.Interfaces
 {
 	/// <summary>
-	/// Интерфейс репозитория пользователя.
+	/// Интерфейс репозитория кошельков пользователя.
 	/// </summary>
 	public interface IWalletRepository
 	{
