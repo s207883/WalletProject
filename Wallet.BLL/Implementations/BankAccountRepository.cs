@@ -162,7 +162,7 @@ namespace Wallet.BLL.Implementations
 			}
 
 			var serivceResult = await _currencyService.GetCurrencyRateAsync(originAccount.Currency.CurrencyName, destinationCurrency.CurrencyName, amountToExhange);
-			if (serivceResult.HasValue)
+			if (serivceResult.HasValue && serivceResult.Value > 0)
 			{
 				originAccount.Amount -= amountToExhange;
 				destinationAccount.Amount += serivceResult.Value;
