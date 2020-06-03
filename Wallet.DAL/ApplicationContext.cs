@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.SqlTypes;
 using Wallet.DAL.Models;
 
 namespace Wallet.DAL

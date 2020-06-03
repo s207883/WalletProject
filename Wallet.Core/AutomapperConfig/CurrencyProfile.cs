@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Wallet.Core.ViewModels;
 using Wallet.DAL.Models;
 
 namespace Wallet.Core.AutomapperConfig
 {
+	/// <summary>
+	/// Профиль автомаппера для валюты.
+	/// </summary>
 	public class CurrencyProfile : Profile
 	{
 		public CurrencyProfile()

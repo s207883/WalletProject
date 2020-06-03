@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Wallet.Core.Enums;
 
 namespace Wallet.Core.EditModels
 {
@@ -14,7 +11,7 @@ namespace Wallet.Core.EditModels
 		/// <summary>
 		/// Идентификатор счета.
 		/// </summary>
-		[Range(1, int.MaxValue, ErrorMessage = "Amount is out of range")]
+		[Range(1, int.MaxValue, ErrorMessage = "Id must be positive number.")]
 		public int AcctountId { get; set; }
 
 		/// <summary>

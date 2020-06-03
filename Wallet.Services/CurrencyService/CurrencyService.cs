@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
