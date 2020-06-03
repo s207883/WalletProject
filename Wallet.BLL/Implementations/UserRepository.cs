@@ -17,22 +17,10 @@ namespace Wallet.BLL.Implementations
 		private readonly ApplicationContext _applicationContext;
 		private readonly IMapper _mapper;
 
-		public UserRepository(ApplicationContext applicationContext, IMapper  mapper)
+		public UserRepository(ApplicationContext applicationContext, IMapper mapper)
 		{
-			if (applicationContext is null)
-			{
-				//TODO: Log this
-				throw new ArgumentNullException(nameof(applicationContext));
-			}
-
-			if (mapper is null)
-			{
-				//TODO: Log this
-				throw new ArgumentNullException(nameof(mapper));
-			}
-
-			_applicationContext = applicationContext;
-			_mapper = mapper;
+			_applicationContext = applicationContext ?? throw new ArgumentNullException(nameof(applicationContext));
+			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 
 		/// <inheritdoc/>

@@ -21,27 +21,11 @@ namespace Wallet.BLL.Implementations
 
 		public BankAccountRepository(ApplicationContext applicationContext, IMapper mapper, CurrencyService currencyService)
 		{
-			if (applicationContext is null)
-			{
-				//TODO: Log this
-				throw new ArgumentNullException(nameof(applicationContext));
-			}
-
-			if (mapper is null)
-			{
-				//TODO: Log this
-				throw new ArgumentNullException(nameof(mapper));
-			}
-
-			if (currencyService is null)
-			{
-				throw new ArgumentNullException(nameof(currencyService));
-			}
-
-			_applicationContext = applicationContext;
-			_mapper = mapper;
-			_currencyService = currencyService;
+			_applicationContext = applicationContext ?? throw new ArgumentNullException(nameof(applicationContext));
+			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+			_currencyService = currencyService ?? throw new ArgumentNullException(nameof(currencyService));
 		}
+
 
 		/// <inheritdoc/>
 		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, long amount)
