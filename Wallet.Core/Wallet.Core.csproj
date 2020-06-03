@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wallet.Core\Wallet.Core.csproj" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Wallet.DAL\Wallet.DAL.csproj" />
-    <ProjectReference Include="..\Wallet.Services\Wallet.Services.csproj" />
   </ItemGroup>
 
 </Project>

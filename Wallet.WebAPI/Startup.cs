@@ -1,16 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
+using System.Reflection;
+using Wallet.BLL;
+using Wallet.BLL.Implementations;
+using Wallet.BLL.Interfaces;
+using Wallet.Core.AutomapperConfig;
+using Wallet.DAL;
+using Wallet.Services.CurrencyService;
 
 namespace Wallet.WebAPI
 {
@@ -23,10 +26,33 @@ namespace Wallet.WebAPI
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+
+			services.AddDbContext<ApplicationContext>
+			(
+				options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=WebAPI_DB;Integrated Security=true;"
+			));
+
+			services.AddSingleton<ICurrencyService, CurrencyService>();
+			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IBankAccountRepository, BankAccountRepository>();
+			services.AddScoped<IWalletRepository, WalletRepository>();
+
+			services.AddScoped<RepoManager>();
+
+			var mappingConfig = new MapperConfiguration(mc =>
+			{
+				mc.AddProfile(new BankAccountProfile());
+				mc.AddProfile(new UserWalletProfile());
+				mc.AddProfile(new CurrencyProfile());
+				mc.AddProfile(new UserProfile());
+			});
+
+			var mapper = mappingConfig.CreateMapper();
+
+			services.AddSingleton(mapper);
 
 			services.AddSwaggerGen(sg =>
 			{
@@ -41,7 +67,6 @@ namespace Wallet.WebAPI
 			});
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
