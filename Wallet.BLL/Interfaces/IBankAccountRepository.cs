@@ -16,7 +16,7 @@ namespace Wallet.BLL.Interfaces
 		/// <param name="accountId">Идентификатор счета.</param>
 		/// <param name="amount">Количество.</param>
 		/// <returns>Результат работы и новое состояние счета.</returns>
-		Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, float amount);
+		Task<(BankRepoActionResults Result, BankAccountViewModel newAccountState)> IncreaseAmount(int accountId, float amount);
 
 		/// <summary>
 		/// Уменьшить количество денег на счете.
@@ -24,7 +24,7 @@ namespace Wallet.BLL.Interfaces
 		/// <param name="accountId">Идентификатор счета.</param>
 		/// <param name="amount">Количество.</param>
 		/// <returns>Результат работы и новое состояние счета.</returns>
-		Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, float amount);
+		Task<(BankRepoActionResults Result, BankAccountViewModel newAccountState)> DescreaseAmount(int accountId, float amount);
 
 
 		/// <summary>

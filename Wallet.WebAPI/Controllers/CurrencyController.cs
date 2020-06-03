@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Wallet.Core.Constants;
 using Wallet.Core.EditModels;
 using Wallet.Services.CurrencyService;
 
 namespace Wallet.WebAPI.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
 	public class CurrencyController : ControllerBase
 	{
 		private readonly ICurrencyService _currencyService;
@@ -22,7 +21,7 @@ namespace Wallet.WebAPI.Controllers
 		/// </summary>
 		/// <param name="currencyModel">Модель.</param>
 		/// <returns>Результат конвертации.</returns>
-		[HttpPost]
+		[HttpPost(ApiRoutes.CurrencyRoutes.ConvertCurrency)]
 		public async Task<ActionResult<float>> ConvertCurrency (CurrencyConvertEditModel currencyModel)
 		{
 			if (ModelState.IsValid)

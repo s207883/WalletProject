@@ -2,14 +2,12 @@
 using System;
 using System.Threading.Tasks;
 using Wallet.BLL;
+using Wallet.Core.Constants;
 using Wallet.Core.Enums;
 using Wallet.Core.ViewModels;
 
 namespace Wallet.WebAPI.Controllers
 {
-
-	[Route("api/[controller]")]
-	[ApiController]
 	public class UserController : ControllerBase
 	{
 		private readonly RepoManager _repoManager;
@@ -24,7 +22,7 @@ namespace Wallet.WebAPI.Controllers
 		/// </summary>
 		/// <param name="userId">Идентификатор.</param>
 		/// <returns>Модель пользователя.</returns>
-		[HttpGet]
+		[HttpGet(ApiRoutes.UserRoutes.GetUserById)]
 		public async Task<ActionResult<UserViewModel>> GetUserById (int userId)
 		{
 			if (userId <=0)

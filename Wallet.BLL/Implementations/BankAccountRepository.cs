@@ -28,7 +28,7 @@ namespace Wallet.BLL.Implementations
 
 
 		/// <inheritdoc/>
-		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, float amount)
+		public async Task<(BankRepoActionResults Result, BankAccountViewModel newAccountState)> DescreaseAmount(int accountId, float amount)
 		{
 			#region Param check
 			if (accountId <= 0)
@@ -54,7 +54,7 @@ namespace Wallet.BLL.Implementations
 				return (BankRepoActionResults.NotEnouthMoney, currentAccountState);
 			}
 
-			account.Amount =- amount;
+			account.Amount -= amount;
 
 			await _applicationContext.SaveChangesAsync();
 
@@ -65,7 +65,7 @@ namespace Wallet.BLL.Implementations
 		}
 
 		/// <inheritdoc/>
-		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, float amount)
+		public async Task<(BankRepoActionResults Result, BankAccountViewModel newAccountState)> IncreaseAmount(int accountId, float amount)
 		{
 			#region Param check
 			if (accountId <= 0)
@@ -85,7 +85,7 @@ namespace Wallet.BLL.Implementations
 				return (BankRepoActionResults.AccountNotFound, null);
 			}
 
-			account.Amount =+ amount;
+			account.Amount += amount;
 
 			await _applicationContext.SaveChangesAsync();
 
