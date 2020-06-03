@@ -1,38 +1,27 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Wallet.DAL.Models;
 
 namespace Wallet.Services.CurrencyService
 {
+
 	//API Doc. https://fixer.io/documentation
 
-	/// <summary>
-	/// Сервис конвертации валюты.
-	/// </summary>
-	public class CurrencyService
+	public class CurrencyService : ICurrencyService
 	{
 		//TODO: Hide the secret
 		private readonly string _apiKey = "bf9f8f7f22f6fa489b4708ecf13b20d9";
-        private readonly Uri _baseAddress = new Uri("http://data.fixer.io/api/convert");
-        private readonly HttpClient _client;
+		private readonly Uri _baseAddress = new Uri("http://data.fixer.io/api/convert");
+		private readonly HttpClient _client;
 
 		public CurrencyService()
 		{
-            _client = new HttpClient { BaseAddress = _baseAddress};
+			_client = new HttpClient { BaseAddress = _baseAddress };
 		}
 
-		/// <summary>
-		/// Перевести валюту.
-		/// </summary>
-		/// <param name="from">Из какой валюты.</param>
-		/// <param name="to">В какую валюту.</param>
-		/// <returns>Результат перевода или null.</returns>
+		/// <inheritdoc/>
 		public async Task<long?> GetCurrencyRateAsync(string from, string to, float amount)
 		{
 			if (string.IsNullOrWhiteSpace(from))
@@ -54,12 +43,12 @@ namespace Wallet.Services.CurrencyService
 
 			try
 			{
-                var fullPath = $"{_baseAddress}/?access_key={_apiKey}&from={from}&to={to}";
-                var result = await _client.GetAsync(fullPath);
+				var fullPath = $"{_baseAddress}/?access_key={_apiKey}&from={from}&to={to}";
+				var result = await _client.GetAsync(fullPath);
 
-                var resultContent = await result.Content.ReadAsStringAsync();
+				var resultContent = await result.Content.ReadAsStringAsync();
 
-                var parsedResult = JsonConvert.DeserializeObject<Root>(resultContent);
+				var parsedResult = JsonConvert.DeserializeObject<Root>(resultContent);
 
 				return parsedResult.result;
 			}

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Wallet.Core.Enums
+﻿namespace Wallet.Core.Enums
 {
 	/// <summary>
 	/// Результат работы репозитория счетов.

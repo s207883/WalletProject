@@ -43,7 +43,7 @@ namespace Wallet.BLL.Implementations
 			_currencyService = currencyService;
 		}
 
-		// </inheritdoc>
+		/// <inheritdoc/>
 		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> DescreaseAmount(int accountId, long amount)
 		{
 			#region Param check
@@ -80,7 +80,7 @@ namespace Wallet.BLL.Implementations
 			return (BankRepoActionResults.Success, result);
 		}
 
-		// </inheritdoc>
+		/// <inheritdoc/>
 		public async Task<(BankRepoActionResults Result, BankAccountViewModel newValue)> IncreaseAmount(int accountId, long amount)
 		{
 			#region Param check
@@ -110,7 +110,7 @@ namespace Wallet.BLL.Implementations
 			return (BankRepoActionResults.Success, result);
 		}
 
-		// </inheritdoc>
+		/// <inheritdoc/>
 		public async Task<(BankRepoActionResults Result, IEnumerable<BankAccountViewModel> bankAccounts)> ExchangeCurrencyAsync(int walletId, int originCurrencyId, int destinationCurrencyId, long amountToExhange)
 		{
 			#region Param check
@@ -133,7 +133,8 @@ namespace Wallet.BLL.Implementations
 				.ThenInclude(ba => ba.Currency)
 				.FirstOrDefaultAsync(wallet => wallet.UserWalletId == walletId);
 
-			var originAccount = userWallet.BankAccounts.FirstOrDefault(acc => acc.CurrencyId == originCurrencyId);
+			var originAccount = userWallet.BankAccounts
+				.FirstOrDefault(acc => acc.CurrencyId == originCurrencyId);
 			if (originAccount == default)
 			{
 				return (BankRepoActionResults.AccountNotFound, null);
@@ -145,13 +146,16 @@ namespace Wallet.BLL.Implementations
 				return (BankRepoActionResults.NotEnouthMoney, new List<BankAccountViewModel> { currentAccountState });
 			}
 
-			var destinationCurrency = await _applicationContext.Currencies.AsNoTracking().FirstOrDefaultAsync(cur => cur.CurrencyId == destinationCurrencyId);
+			var destinationCurrency = await _applicationContext.Currencies
+				.AsNoTracking()
+				.FirstOrDefaultAsync(cur => cur.CurrencyId == destinationCurrencyId);
 			if (destinationCurrency == default)
 			{
 				return (BankRepoActionResults.CurrencyNotFound, null);
 			}
 
-			var destinationAccount = userWallet.BankAccounts.FirstOrDefault(acc => acc.CurrencyId == destinationCurrencyId);
+			var destinationAccount = userWallet.BankAccounts
+				.FirstOrDefault(acc => acc.CurrencyId == destinationCurrencyId);
 			if (destinationAccount == default)
 			{
 				destinationAccount = new BankAccount { UserWalletId = walletId, CurrencyId = destinationCurrencyId, Amount = 0 };

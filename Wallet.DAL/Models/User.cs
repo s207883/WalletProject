@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Wallet.DAL.Models
+﻿namespace Wallet.DAL.Models
 {
 	/// <summary>
 	/// Модель пользователя.
