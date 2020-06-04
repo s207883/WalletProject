@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Flurl;
+using Flurl.Http;
+using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Wallet.Services.CurrencyService
@@ -12,13 +13,7 @@ namespace Wallet.Services.CurrencyService
 	{
 		//TODO: Hide the secret
 		private readonly string _apiKey = "ec2d7725f5fbf6cf1073";
-		private readonly Uri _baseAddress = new Uri("https://free.currconv.com");
-		private readonly HttpClient _client;
-
-		public CurrencyService()
-		{
-			_client = new HttpClient { BaseAddress = _baseAddress };
-		}
+		private readonly string _baseAddress = "https://free.currconv.com/";
 
 		/// <inheritdoc/>
 		public async Task<float?> GetCurrencyRateAsync(string from, string to, float amount)
@@ -42,11 +37,17 @@ namespace Wallet.Services.CurrencyService
 
 			try
 			{
-				// /api/v7/convert?apiKey=ec2d7725f5fbf6cf1073&q=USD_PHP&compact=y
-				var fullPath = $"{_baseAddress}api/v7/convert?apiKey={_apiKey}&q={from}_{to}&compact=y";
-				var result = await _client.GetAsync(fullPath);
+				var getResp = await _baseAddress
+					.AppendPathSegment("api/v7/convert/")
+					.SetQueryParams( new
+					{
+						apiKey = _apiKey,
+						q = $"{from}_{to}",
+						compact = "y",
+					})
+					.GetAsync();
 
-				var resultContent = await result.Content.ReadAsStringAsync();
+				var resultContent = await getResp.Content.ReadAsStringAsync();
 
 				if (resultContent.Contains("val"))
 				{

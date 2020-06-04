@@ -25,14 +25,6 @@
             <param name="model">Модель.</param>
             <returns>Результат перевода.</returns>
         </member>
-        <member name="M:Wallet.WebAPI.Controllers.BankAccountController.GetRepoAmountRequestResult(Wallet.Core.Enums.BankRepoActionResults,Wallet.Core.ViewModels.BankAccountViewModel)">
-            <summary>
-            Сгенерировать ответ по полученным данным из непозитория.
-            </summary>
-            <param name="Result">Результат работы репозитория.</param>
-            <param name="newAccountState">Новое состояние счета.</param>
-            <returns>ActionResult</returns>
-        </member>
         <member name="M:Wallet.WebAPI.Controllers.CurrencyController.ConvertCurrency(Wallet.Core.EditModels.CurrencyConvertEditModel)">
             <summary>
             Конвертировать валюту.

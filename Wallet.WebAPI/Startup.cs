@@ -32,6 +32,7 @@ namespace Wallet.WebAPI
 
 			services.AddDbContext<ApplicationContext>
 			(
+				//TODO: Move to settings.json
 				options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=WebAPI_DB;Integrated Security=true;"
 			));
 
