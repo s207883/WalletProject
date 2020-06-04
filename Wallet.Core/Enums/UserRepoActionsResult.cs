@@ -1,4 +1,6 @@
-﻿namespace Wallet.Core.Enums
+﻿using System.ComponentModel;
+
+namespace Wallet.Core.Enums
 {
 	/// <summary>
 	/// Результат работы репозитория пользователя.
@@ -8,16 +10,19 @@
 		/// <summary>
 		/// Успех.
 		/// </summary>
+		[Description("Успех")]
 		Success,
 
 		/// <summary>
 		/// Не обнаружен пользователь.
 		/// </summary>
+		[Description("Не обнаружен пользователь")]
 		IdentityNotFound,
 
 		/// <summary>
-		/// Нерпвильный идентификатор.
+		/// Неправильный идентификатор.
 		/// </summary>
+		[Description("Неправильный идентификатор")]
 		WrongIdentity,
 	}
 }

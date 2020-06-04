@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Wallet.BLL;
 using Wallet.Core.Constants;
 using Wallet.Core.Enums;
+using Wallet.Core.Extentions;
 using Wallet.Core.ViewModels;
 
 namespace Wallet.WebAPI.Controllers
@@ -38,11 +39,11 @@ namespace Wallet.WebAPI.Controllers
 
 			if (model.Result == UserRepoActionsResult.IdentityNotFound)
 			{
-				return NotFound();
+				return NotFound(model.Result.GetDescription());
 			}
 			else
 			{
-				return BadRequest();
+				return BadRequest(model.Result.GetDescription());
 			}
 		}
 	}

@@ -78,7 +78,9 @@ namespace Wallet.BLL.Implementations
 			}
 			#endregion
 
-			var account = await _applicationContext.BankAccounts.FirstOrDefaultAsync(acc => acc.BankAccountId == accountId);
+			var account = await _applicationContext.BankAccounts
+				.Include(cur => cur.Currency)
+				.FirstOrDefaultAsync(acc => acc.BankAccountId == accountId);
 
 			if (account == default)
 			{

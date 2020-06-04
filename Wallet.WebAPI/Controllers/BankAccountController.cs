@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using Wallet.BLL;
 using Wallet.Core.Constants;
 using Wallet.Core.EditModels;
 using Wallet.Core.Enums;
+using Wallet.Core.Extentions;
 using Wallet.Core.ViewModels;
 
 namespace Wallet.WebAPI.Controllers
@@ -30,7 +32,14 @@ namespace Wallet.WebAPI.Controllers
 			if (ModelState.IsValid)
 			{
 				var (Result, newAccountState) = await _repoManager.BankAccountRepository.IncreaseAmount(amountEditModel.AcctountId, amountEditModel.Amount);
-				return GetRepoAmountRequestResult(Result, newAccountState);
+				if (Result == BankRepoActionResults.Success)
+				{
+					return Ok(newAccountState);
+				}
+				else
+				{
+					return BadRequest(Result.GetDescription());
+				}
 			}
 			else
 			{
@@ -49,7 +58,15 @@ namespace Wallet.WebAPI.Controllers
 			if (ModelState.IsValid)
 			{
 				var (Result, newAccountState) = await _repoManager.BankAccountRepository.DescreaseAmount(amountEditModel.AcctountId, amountEditModel.Amount);
-				return GetRepoAmountRequestResult(Result, newAccountState);
+
+				if (Result == BankRepoActionResults.Success)
+				{
+					return Ok(newAccountState);
+				}
+				else
+				{
+					return BadRequest(Result.GetDescription());
+				}
 			}
 			else
 			{
@@ -68,57 +85,19 @@ namespace Wallet.WebAPI.Controllers
 			if (ModelState.IsValid)
 			{
 				var (Result, bankAccounts) = await _repoManager.BankAccountRepository.ExchangeCurrencyAsync(model.WalletId, model.OriginCurrencyId, model.DestinationCurrencyId, model.Amount);
-				return GetRepoExchangeRequestResult(Result, bankAccounts);
+
+				if (Result == BankRepoActionResults.Success)
+				{
+					return Ok(bankAccounts);
+				}
+				else
+				{
+					return BadRequest(Result.GetDescription());
+				}
 			}
 			else
 			{
 				return BadRequest(model);
-			}
-		}
-
-		//TODO: Replace to generic.
-		/// <summary>
-		/// Сгенерировать ответ по полученным данным из непозитория.
-		/// </summary>
-		/// <param name="Result">Результат работы репозитория.</param>
-		/// <param name="newAccountState">Новое состояние счета.</param>
-		/// <returns>ActionResult</returns>
-		private ActionResult<BankAccountViewModel> GetRepoAmountRequestResult(BankRepoActionResults Result, BankAccountViewModel newAccountState)
-		{
-			switch (Result)
-			{
-				case BankRepoActionResults.Success:
-					return Ok(newAccountState);
-				case BankRepoActionResults.AccountNotFound:
-				case BankRepoActionResults.CurrencyNotFound:
-				case BankRepoActionResults.WalletNotFound:
-					return NotFound();
-				case BankRepoActionResults.NotEnouthMoney:
-				case BankRepoActionResults.WrongAmount:
-					return BadRequest("Received wrong amount or not enouth money.");
-				case BankRepoActionResults.OutterServiceFailure:
-					return Problem("Outer service sent no response or response was invalid.");
-				default:
-					return BadRequest();
-			}
-		}
-		private ActionResult<IEnumerable<BankAccountViewModel>> GetRepoExchangeRequestResult(BankRepoActionResults Result, IEnumerable<BankAccountViewModel> newAccountState)
-		{
-			switch (Result)
-			{
-				case BankRepoActionResults.Success:
-					return Ok(newAccountState);
-				case BankRepoActionResults.AccountNotFound:
-				case BankRepoActionResults.CurrencyNotFound:
-				case BankRepoActionResults.WalletNotFound:
-					return NotFound();
-				case BankRepoActionResults.NotEnouthMoney:
-				case BankRepoActionResults.WrongAmount:
-					return BadRequest("Received wrong amount or not enouth money.");
-				case BankRepoActionResults.OutterServiceFailure:
-					return Problem("Outer service sent no response or response was invalid.");
-				default:
-					return BadRequest();
 			}
 		}
 	}
